@@ -19,10 +19,10 @@ jobs:
         run: |
           FILE="./Formula/${{ env.FORMULA }}.rb"
           VERSION=`echo ${{ env.VERSION }} | sed -e 's/[a-z]\{1\}//'`
-          echo ${VERSION}
-          cat ${FILE} | sed -e 's/version ".\+"$/version "'${VERSION}'"/' > ${FILE}
-          cat ${FILE} | sed -e 's@url ".\+"$@url "'${{ env.ZIP_URL }}'"@' > ${FILE}
-          cat ${FILE} | sed -e 's/sha256 "\.\+"$/sha256 "'${{ env.SHA256 }}'"/' > ${FILE}
+          sed -i ${FILE} \
+            -e 's/version ".\+"$/version "'${VERSION}'"/' \
+            -e 's@url ".\+"$@url "'${{ env.ZIP_URL }}'"@' \
+            -e 's/sha256 ".\+"$/sha256 "'${{ env.SHA256 }}'"/'
           cat ${FILE}
       - name: Commit
         run: |
