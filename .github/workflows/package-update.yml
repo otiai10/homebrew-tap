@@ -17,7 +17,7 @@ jobs:
           echo "SHA256=${{ github.event.client_payload.sha256 }}" >> $GITHUB_ENV
       - name: Update formula file
         run: |
-          FILE="${{ env.GITHUB_WORKSPACE }}/Formula/${{ env.FORMULA }}.rb"
+          FILE="${GITHUB_WORKSPACE}/Formula/${{ env.FORMULA }}.rb"
           VERSION=`echo ${{ env.VERSION }} | sed -e 's/[a-z]\{1\}//'`
           cat ${FILE} | sed -e 's/version "\.\+"$/version "'${VERSION}'"/' > ${FILE}
           cat ${FILE} | sed -e 's/url "\.\+"$/url "'${{ env.ZIP_URL }}'"/' > ${FILE}

@@ -1,0 +1,1 @@
+[![Package Update](https://github.com/otiai10/homebrew-tap/actions/workflows/package-update.yml/badge.svg)](https://github.com/otiai10/homebrew-tap/actions/workflows/package-update.yml)
