@@ -1,0 +1,33 @@
+name: Package Update
+on:
+  repository_dispatch:
+    types: [package_update]
+
+jobs:
+  formula_update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Dump
+        run: echo "${{ toJson(github.event.client_payload) }}"
+      - name: Set env
+        run: |
+          echo "FORMULA=${{ github.event.client_payload.formula }}" >> $GITHUB_ENV
+          echo "VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_ENV
+          echo "ZIP_URL=${{ github.event.client_payload.zip_url }}" >> $GITHUB_ENV
+          echo "SHA256=${{ github.event.client_payload.sha256 }}" >> $GITHUB_ENV
+      - name: Update formula file
+        run: |
+          FILE="${{ env.GITHUB_WORKSPACE }}/Formula/${{ env.FORMULA }}.rb"
+          VERSION=`echo ${{ env.VERSION }} | sed -e 's/[a-z]\{1\}//'`
+          cat ${FILE} | sed -e 's/version "\.\+"$/version "'${VERSION}'"/' > ${FILE}
+          cat ${FILE} | sed -e 's/url "\.\+"$/url "'${{ env.ZIP_URL }}'"/' > ${FILE}
+          cat ${FILE} | sed -e 's/sha256 "\.\+"$/sha256 "'${{ env.SHA256 }}'"/' > ${FILE}
+      - name: Commit
+        run: |
+          git config --global user.email otiai10+ayanel-ci@gmail.com
+          git config --global user.name "Ayanel CI"
+          git add ./Formula
+          git commit -m "Update ${{ env.FORMULA }}: ${{ env.VERSION }}"
+          git push origin main
