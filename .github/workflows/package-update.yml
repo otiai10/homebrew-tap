@@ -30,4 +30,4 @@ jobs:
           git config --global user.name "Ayanel CI"
           git add ./Formula
           git commit -m "Update ${{ env.FORMULA }}: ${{ env.VERSION }}"
-          git push origin main
+          git push origin HEAD:main
