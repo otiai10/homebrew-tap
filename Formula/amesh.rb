@@ -3,10 +3,12 @@
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 class Amesh < Formula
   desc "みんなだいすき東京アメッシュ！"
-  version "1.1.0"
   homepage "https://github.com/otiai10/amesh"
-  url "https://github.com/otiai10/amesh/releases/download/v1.1.0/darwin_amd64.zip"
-  sha256 "48eaf42d363324e0ee0dcd4077c2bfe7b78b994ef9aa7edcf7a33e5a5d533fd2"
+  # {{{
+  version "1.2.5"
+  url "https://github.com/otiai10/amesh/releases/download/v1.2.5/amesh-darwin.v1.2.5.zip"
+  sha256 "050065c89fc6373de1bfbec0d7d75fe12d06d722d1c977da71a49a2f395c8324"
+  # }}}
 
   def install
     bin.install "amesh"
