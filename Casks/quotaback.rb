@@ -1,6 +1,6 @@
 cask "quotaback" do
-  version "0.1.2"
-  sha256 "26b23f7ff1a6c48d8a33c5758bd0650376fcdc8e8656e1c20474cb1a235593fb"
+  version "0.2.0"
+  sha256 "a72258db5e4ae5aa3b66898eef631bb6f59141d5b75a5e2cee12856ac600efd6"
 
   url "https://github.com/otiai10/quotaback/releases/download/v#{version}/Quotaback-#{version}.zip"
   name "Quotaback"
